@@ -33,16 +33,14 @@ messages.hist(column="length",by="label",bins=60,figsize=(12,4))
 #plt.show()
 
 import string
-mess = 'Sample message! Notice: it has punctutation'
-
-nopunc = [c for c in mess if c not in string.punctuation]
-print(nopunc)
 from nltk.corpus import stopwords
 
-nopunc = ''.join(nopunc)
-nopunc = nopunc.split()
-#print(nopunc)
 
-clean_mess = [word for word in nopunc if word.lower() not in stopwords.words('English')]
-print(clean_mess)
+def text_process(mess):
+    nopunc = [char for char in mess if char not in string.punctuation]
+    nopunc="".join(nopunc)
+    return [word for word in nopunc.split() if word.lower() not in stopwords.words("English")]
+
+list=messages['message'][:2].apply(text_process)
+print(list)
 
